@@ -3,6 +3,7 @@
 
 """
 漢字をひらがなに変換して指定フォントで画像出力する
+フォント収録文字リストを用いて存在する単語は原文のまま
 
 PySimpleGUI pykakasi Pillow パッケージを使用
 pip install pysimplegui
@@ -26,8 +27,13 @@ txtdata = u'''秘密結社holoXの掃除屋でholoXのインターン生。
 font_file = "./SakaChloFont_P.ttf"
 #出力画像
 saveimgfile = './image.png'
-outtxt = ''
+#フォント収録文字一覧
+chirlist_file = "./chrlist1.txt"
+f = open(chirlist_file, 'r')
+chirlist = f.read()
+f.close()
 
+outtxt = ''
 
 sg.theme('SystemDefault')
 layout = [
@@ -40,28 +46,76 @@ layout = [
 ]
 window = sg.Window("沙花叉直筆風ジェネレーター", layout, size = (800, 600))
 
+#引数 全角変換したい文字列
+def clean_text(text):
+    abc_half = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    abc_full = "ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ"
+    digit_half = "0123456789"
+    digit_full = "０１２３４５６７８９"
+    katakana_half = "ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝ"
+    katakana_full = "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン"
+    punc_half = "!#$%&¥()*+,-./:;<=>?@[]^_`{|}~"
+    punc_full = "！＃＄％＆￥（）＊＋，－．／：；＜＝＞？＠［］＾＿｀｛｜｝～"
+
+    tmp01 = "ｶﾞｷﾞｸﾞｹﾞｺﾞｻﾞｼﾞｽﾞｾﾞｿﾞﾀﾞﾁﾞﾂﾞﾃﾞﾄﾞﾊﾞﾋﾞﾌﾞﾍﾞﾎﾞﾊﾟﾋﾟﾌﾟﾍﾟﾎﾟ"
+    tmp02 = "ガギグゲゴザジズゼゾダヂヅデドバビブベボパピプペポ"
+    transtable02 = {}
+    for i in range(len(tmp02)):
+        be = tmp01[i * 2:i * 2 + 2]
+        af = tmp02[i]
+        transtable02[be] = af
+
+    text = str(text).replace("\u3000", " ") #全角スペースを半角に
+
+    before = abc_full + digit_full + katakana_half + punc_full
+    after = abc_half + digit_half + katakana_full + punc_half
+
+    transtable01 = str.maketrans(before, after)
+    text = text.translate(transtable01)
+    text = text.translate(transtable02)
+    
+    text = text.translate(str.maketrans({chr(0x0021 + i): chr(0xFF01 + i) for i in range(94)}))
+
+    return text
+
 #引数 ひらがなにしたい文字列
 def kanji2hira(txtdata):
     outtxt = ""
     kakasi = pykakasi.kakasi()
+
+    """
+    #kakasi旧api用
     #漢字からひらがな
     kakasi.setMode('J', 'H')
     #カタカナからひらがな
     #kakasi.setMode("K", "H")
     kconv = kakasi.getConverter()
+    """
     
     #全角変換
-    txtdata = txtdata.translate(str.maketrans({chr(0x0021 + i): chr(0xFF01 + i) for i in range(94)}))
+    txtdata = clean_text(txtdata)
     
     txtdata = txtdata.split("\n")
     for txt1 in txtdata:
         #旧apiいつかなくなるかも
-        kana = kconv.do(txt1)
-        outtxt = outtxt + kana + '\n'
+        #kana = kconv.do(txt1)
+        #outtxt = outtxt + kana + '\n'
 
-        #新api全部ひらがなになっちゃう
-        #outtxt = outtxt + ''.join([item['hira'] for item in kakasi.convert(txt1)])
-        
+        #新api 辞書型で変換される
+        for txt2 in kakasi.convert(txt1):
+            orig_txt = txt2['orig']
+            #一文字づつに切り分けて フォントに収録されているか検索
+            f_word = True
+            for word1 in orig_txt:
+                if not (word1 in chirlist):
+                    f_word = False
+                    break
+            
+            if f_word:outtxt = outtxt + txt2['orig']#収録されていれば原文
+            else:outtxt = outtxt + txt2['hira']#収録されていなければひらがな
+            
+        outtxt = outtxt + "\n"
+
     return outtxt
 
 #引数 画像にする文字列 フォントサイズ
