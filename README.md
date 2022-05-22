@@ -30,3 +30,12 @@ https://www.youtube.com/watch?v=peYZvG979xA
 
 https://www.youtube.com/watch?v=i8m4NUPByMA  
 【HPB】沙花叉クロヱ初のお誕生日カウントダウン！【沙花叉クロヱ/ホロライブ】  
+
+twitter  
+https://twitter.com/sakamatachloe/status/1466544780096458752  
+https://twitter.com/sakamatachloe/status/1479071582786318336  
+https://twitter.com/sakamatachloe/status/1496787201115316234  
+https://twitter.com/sakamatachloe/status/1516026633362149384  
+https://twitter.com/sakamatachloe/status/1518718542786433026  
+https://twitter.com/sakamatachloe/status/1526140127382151168  
+
