@@ -25,24 +25,24 @@ txtdata = u'''秘密結社holoXの掃除屋でholoXのインターン生。
 #フォントを指定
 font_file = "./SakaChloFont_P.ttf"
 #出力画像
-saveimgfile='./image.png'
-outtxt=''
+saveimgfile = './image.png'
+outtxt = ''
 
 
 sg.theme('SystemDefault')
 layout = [
-        [sg.Multiline(txtdata,key="basetxt",size=(800,6))],
-        [sg.Button(' 全角ひらがな変換 ',key="convtxt")],
-        [sg.Multiline(key="hiratxt",size=(800,6))],
-        [sg.Text("フォントサイズ"), sg.InputText(key="sfontsize",default_text='24',size=(6,)),
-         sg.Button(' 画像生成 ',key="convimg"),sg.Text(saveimgfile)],
-        [sg.Image('./image.png',key="outimg")],
+        [sg.Multiline(txtdata, key = "basetxt", size = (800, 6))],
+        [sg.Button(' 全角ひらがな変換 ', key = "convtxt")],
+        [sg.Multiline(key = "hiratxt", size = (800, 6))],
+        [sg.Text("フォントサイズ"), sg.InputText(key = "sfontsize", default_text = '24', size = (6, )),
+         sg.Button(' 画像生成 ', key = "convimg"), sg.Text(saveimgfile)],
+        [sg.Image('./image.png', key = "outimg")],
 ]
-window = sg.Window("沙花叉直筆風ジェネレーター", layout,size=(800,600))
+window = sg.Window("沙花叉直筆風ジェネレーター", layout, size = (800, 600))
 
 #引数 ひらがなにしたい文字列
 def kanji2hira(txtdata):
-    outtxt=""
+    outtxt = ""
     kakasi = pykakasi.kakasi()
     #漢字からひらがな
     kakasi.setMode('J', 'H')
@@ -51,21 +51,21 @@ def kanji2hira(txtdata):
     kconv = kakasi.getConverter()
     
     #全角変換
-    txtdata=txtdata.translate(str.maketrans({chr(0x0021 + i): chr(0xFF01 + i) for i in range(94)}))
+    txtdata = txtdata.translate(str.maketrans({chr(0x0021 + i): chr(0xFF01 + i) for i in range(94)}))
     
     txtdata = txtdata.split("\n")
     for txt1 in txtdata:
         #旧apiいつかなくなるかも
         kana = kconv.do(txt1)
-        outtxt=outtxt+kana+'\n'
+        outtxt = outtxt + kana + '\n'
 
         #新api全部ひらがなになっちゃう
-        #outtxt=outtxt+''.join([item['hira'] for item in kakasi.convert(txt1)])
+        #outtxt = outtxt + ''.join([item['hira'] for item in kakasi.convert(txt1)])
         
     return outtxt
 
 #引数 画像にする文字列 フォントサイズ
-def hira2img(outtxt,fontsize):
+def hira2img(outtxt, fontsize):
     x = []
     y = 0
     txtdata = outtxt.split("\n")
@@ -74,7 +74,10 @@ def hira2img(outtxt,fontsize):
         y += 1
         
     #画像の基本設定
-    canvasSize    = (fontsize*max(x), fontsize*(y+3))
+    mx = max(x)
+    if mx < 4:mx = 3
+    if y < 2:y = 1
+    canvasSize    = (fontsize * mx, fontsize * (y + 2))
     backgroundRGB = (255, 255, 255)
     textRGB       = (0, 0, 0)
 
@@ -84,13 +87,13 @@ def hira2img(outtxt,fontsize):
 
     #文字列の描画
     font = PIL.ImageFont.truetype(font_file, fontsize)
-    textWidth, textHeight = draw.textsize(outtxt,font=font)
+    textWidth, textHeight = draw.textsize(outtxt, font=font)
 
     #画像のリサイズ
     
     textTopLeft = (fontsize, fontsize) 
     draw.text(textTopLeft, outtxt, fill=textRGB, font=font)
-    csize = (0,0,textWidth+(fontsize*2),fontsize*(y+2))
+    csize = (0, 0, textWidth + (fontsize * 2), fontsize * (y + 2))
     img = img.crop(csize)
 
     img.save(saveimgfile)
@@ -108,7 +111,7 @@ while True:
 
     #画像生成ボタン
     elif event == 'convimg':
-        hira2img(values['hiratxt'],int(values['sfontsize']))
+        hira2img(values['hiratxt'], int(values['sfontsize']))
         window['outimg'].update(saveimgfile)
         
 window.close()
