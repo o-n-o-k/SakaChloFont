@@ -66,15 +66,15 @@ def kanji2hira(txtdata):
 
 #引数 画像にする文字列 フォントサイズ
 def hira2img(outtxt,fontsize):
-    x=[]
-    y=0
+    x = []
+    y = 0
     txtdata = outtxt.split("\n")
     for txt1 in txtdata:
         x.append(len(txt1))
-        y=y+1
+        y += 1
         
     #画像の基本設定
-    canvasSize    = (fontsize*max(x), fontsize*(y+2))
+    canvasSize    = (fontsize*max(x), fontsize*(y+3))
     backgroundRGB = (255, 255, 255)
     textRGB       = (0, 0, 0)
 
@@ -87,10 +87,11 @@ def hira2img(outtxt,fontsize):
     textWidth, textHeight = draw.textsize(outtxt,font=font)
 
     #画像のリサイズ
+    
     textTopLeft = (fontsize, fontsize) 
     draw.text(textTopLeft, outtxt, fill=textRGB, font=font)
-    csize=(0,0,textWidth+(fontsize*2),textHeight+(fontsize*5))
-    img=img.crop(csize)
+    csize = (0,0,textWidth+(fontsize*2),fontsize*(y+2))
+    img = img.crop(csize)
 
     img.save(saveimgfile)
     return
