@@ -5,13 +5,15 @@
 漢字をひらがなに変換して指定フォントで画像出力する
 フォント収録文字リストを用いて存在する単語は原文のまま
 
-PySimpleGUI pykakasi Pillow パッケージを使用
+fonttools PySimpleGUI pykakasi Pillow パッケージを使用
+pip install fonttools
 pip install pysimplegui
 pip install pykakasi
 pip install Pillow
 
 """
 
+from fontTools import ttLib
 import PySimpleGUI as sg
 import pykakasi
 import PIL.Image
@@ -27,14 +29,18 @@ txtdata = u'''秘密結社holoXの掃除屋でholoXのインターン生。
 font_file = "./SakaChloFont_P.ttf"
 #出力画像
 saveimgfile = './image.png'
-#フォント収録文字一覧
-chirlist_file = "./chrlist1.txt"
-f = open(chirlist_file, 'r')
-chirlist = f.read()
-f.close()
 
 outtxt = ''
 
+# フォント収録文字を取得
+with ttLib.ttFont.TTFont(font_file, fontNumber=0) as font:
+    cmap = font.getBestCmap()
+chrlist = ""
+i = 0
+for cmap_key in cmap:
+    chrlist = chrlist + chr(cmap_key)
+
+#GUIレイアウト
 sg.theme('SystemDefault')
 layout = [
         [sg.Multiline(txtdata, key = "basetxt", size = (800, 6))],
