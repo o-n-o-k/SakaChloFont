@@ -31,9 +31,11 @@ https://www.youtube.com/watch?v=peYZvG979xA
 https://www.youtube.com/watch?v=i8m4NUPByMA  
 【HPB】沙花叉クロヱ初のお誕生日カウントダウン！【沙花叉クロヱ/ホロライブ】  
 
-
 https://www.youtube.com/watch?v=vebSLR2aK1A  
 【凸待ち】4周年記念！お披露目＆凸待ち！【ホロライブ_夏色まつり】 
+
+https://www.youtube.com/watch?v=MOekZ-g5qJQ  
+【#沙花叉クロヱ3D】シャチ出没注意【ホロライブ】
 
 twitter  
 https://twitter.com/sakamatachloe/status/1466544780096458752  
