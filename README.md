@@ -37,6 +37,9 @@ https://www.youtube.com/watch?v=vebSLR2aK1A
 https://www.youtube.com/watch?v=MOekZ-g5qJQ  
 【#沙花叉クロヱ3D】シャチ出没注意【ホロライブ】
 
+https://www.youtube.com/watch?v=aGp1Q3aH_Bk  
+【#SSholoX】世界征服に向けて…【3Dアジトお披露目】  
+
 twitter  
 https://twitter.com/sakamatachloe/status/1466544780096458752  
 https://twitter.com/sakamatachloe/status/1479071582786318336  
@@ -45,6 +48,3 @@ https://twitter.com/sakamatachloe/status/1516026633362149384
 https://twitter.com/sakamatachloe/status/1518718542786433026  
 https://twitter.com/sakamatachloe/status/1526140127382151168  
 https://twitter.com/sakamatachloe/status/1536226711108747265  
-
-製作者  
-https://twitter.com/_o_n_o_k_
