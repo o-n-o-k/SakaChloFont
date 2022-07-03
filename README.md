@@ -5,7 +5,7 @@ hololive所属のVtuver 沙花叉クロヱ さんの手書き風フォント
 
 全角ひらがな、カタカナのみです  
 英数字、漢字は一部だけ入っています  
-カタカナの一部はその他の文字の組み合わせて編集されたものがあります  
+数字、カタカナの一部はその他の文字の組み合わせて編集されたものがあります  
 
 収録されている文字は chrlist.txt を参照  
 
@@ -48,3 +48,4 @@ https://twitter.com/sakamatachloe/status/1516026633362149384
 https://twitter.com/sakamatachloe/status/1518718542786433026  
 https://twitter.com/sakamatachloe/status/1526140127382151168  
 https://twitter.com/sakamatachloe/status/1536226711108747265  
+https://twitter.com/sakamatachloe/status/1543563599616131077  
