@@ -38,7 +38,10 @@ https://www.youtube.com/watch?v=MOekZ-g5qJQ
 【#沙花叉クロヱ3D】シャチ出没注意【ホロライブ】
 
 https://www.youtube.com/watch?v=aGp1Q3aH_Bk  
-【#SSholoX】世界征服に向けて…【3Dアジトお披露目】  
+【#SSholoX】世界征服に向けて…【3Dアジトお披露目】 
+
+https://www.youtube.com/watch?v=wDABrYnUdYY  
+【カメラあり】天の川流るる…星に願いを…【沙花叉クロヱ/ホロライブ】   
 
 twitter  
 https://twitter.com/sakamatachloe/status/1466544780096458752  
